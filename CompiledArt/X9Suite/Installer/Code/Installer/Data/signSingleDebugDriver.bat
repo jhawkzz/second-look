@@ -1,0 +1,1 @@
+"C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin\signtool.exe" sign /v /ac "%COMPILEDART_CERT_DIR%MSCV-GlobalSign.cer" /f "%COMPILEDART_CERT_DIR%compiledArt.pfx" /p mukaC8aStuva /t http://timestamp.verisign.com/scripts/timstamp.dll AppIntegrityDriver.sys

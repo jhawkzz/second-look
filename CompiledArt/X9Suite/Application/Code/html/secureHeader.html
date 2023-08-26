@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+
+<title>Second Look by Compiled Art</title>
+
+<style type="text/css">
+
+td.headerpic{ 
+background: url(header.png); 
+} 
+
+td.bg{ 
+background: url(b.gif); 
+} 
+
+p  {font-size: 97%; font: 14px Vendara, sans-serif; z-index: 100; color: white; margin-top:0px; margin-bottom:0px}
+
+pb {font-size: 97%; font: 14px Vendara, sans-serif; z-index: 100; color: black; margin-top:0px; margin-bottom:0px}   
+td.pb {font-size: 97%; font: 14px Vendara, sans-serif; z-index: 100; color: black; margin-top:0px; margin-bottom:0px}
+
+a.ovalbutton{
+background: transparent url('oval-blue-left.gif') no-repeat top left;
+display: block;
+float: none; /*CHANGED FROM float TO VALIDATE */
+font: normal 13px Tahoma; /* Change 13px as desired */
+line-height: 16px; /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 24px) */
+height: 24px; /* Height of button background height */
+padding-left: 11px; /* Width of left menu image */
+text-decoration: none;
+}
+
+a:link.ovalbutton, a:visited.ovalbutton, a:active.ovalbutton{
+color: #494949; /*button text color*/
+}
+
+a.ovalbutton span{
+background: transparent url('oval-blue-right.gif') no-repeat top right;
+display: block;
+padding: 4px 11px 4px 0; /*Set 11px below to match value of 'padding-left' value above*/
+}
+
+a.ovalbutton:hover{ /* Hover state CSS */
+background-position: bottom left;
+}
+
+a.ovalbutton:hover span{ /* Hover state CSS */
+background-position: bottom right;
+color: white;
+}
+
+.buttonwrapper{ /* Container you can use to surround a CSS button to clear float */
+overflow: hidden; /*See: http://www.quirksmode.org/css/clearing.html */
+width: 100%;
+}
+
+.suckertreemenu ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+/*Top level list items*/
+.suckertreemenu ul li{
+position: relative;
+display: inline;
+float: left;
+/*background-color: #F3F3F3; overall menu background color*/
+background: transparent url('a.gif');
+}
+
+/*Top level menu link items style*/
+.suckertreemenu ul li a{
+display: block;
+width: 120px; /*Width of top level menu link items*/
+padding: 2px 8px;
+border: 1px solid #ADD8E6;
+border-left-width: 0;
+text-decoration: none;
+color: white;
+font-size: 97%; font: 14px Vendara, sans-serif; z-index: 100; margin-top:0px; margin-bottom:0px
+}
+	
+/*1st sub level menu*/
+.suckertreemenu ul li ul{
+left: 0;
+position: absolute;
+top: 1em; /* no need to change, as true value set by script */
+display: block;
+visibility: hidden;
+}
+
+/*Sub level menu list items (undo style from Top level List Items)*/
+.suckertreemenu ul li ul li{
+display: list-item;
+float: none;
+}
+
+/*All subsequent sub menu levels offset after 1st level sub menu */
+.suckertreemenu ul li ul li ul{ 
+left: 159px; /* no need to change, as true value set by script */
+top: 0;
+}
+
+/* Sub level menu links style */
+.suckertreemenu ul li ul li a{
+display: block;
+width: 160px; /*width of sub menu levels*/
+color: white;
+text-decoration: none;
+padding: 1px 5px;
+border: 1px solid white;
+}
+
+.suckertreemenu ul li a:hover{
+/*background-color: black;*/
+background: transparent url('b.gif');
+color: white;
+}
+
+* html p#iepara{ /*For a paragraph (if any) that immediately follows suckertree menu, add 1em top spacing between the two in IE*/
+padding-top: 1em;
+}
+	
+/* Holly Hack for IE \*/
+* html .suckertreemenu ul li { float: left; height: 1%; width: 0px;}
+* html .suckertreemenu ul li a { height: 1%; }
+/* End */
+
+</style>
+
+<script type="text/javascript">
+
+//SuckerTree Horizontal Menu (Sept 14th, 06)
+//By Dynamic Drive: http://www.dynamicdrive.com/style/
+
+var menuids=["treemenu1"] //Enter id(s) of SuckerTree UL menus, separated by commas
+
+function buildsubmenus_horizontal(){
+for (var i=0; i<menuids.length; i++){
+var ultags=document.getElementById(menuids[i]).getElementsByTagName("ul")
+for (var t=0; t<ultags.length; t++){
+if (ultags[t].parentNode.parentNode.id==menuids[i]){ //if this is a first level submenu
+ultags[t].style.top=ultags[t].parentNode.offsetHeight+"px" //dynamically position first level submenus to be height of main menu item
+ultags[t].parentNode.getElementsByTagName("a")[0].className="mainfoldericon"}
+else{ //else if this is a sub level menu (ul)
+ultags[t].style.left=ultags[t-1].getElementsByTagName("a")[0].offsetWidth+"px" //position menu to the right of menu item that activated it
+ultags[t].parentNode.getElementsByTagName("a")[0].className="subfoldericon"}
+ultags[t].parentNode.onmouseover=function(){
+this.getElementsByTagName("ul")[0].style.visibility="visible"}
+ultags[t].parentNode.onmouseout=function(){
+this.getElementsByTagName("ul")[0].style.visibility="hidden"}
+    }
+  }
+}
+
+if (window.addEventListener)
+window.addEventListener("load", buildsubmenus_horizontal, false)
+else if (window.attachEvent)
+window.attachEvent("onload", buildsubmenus_horizontal)
+
+</script>
+
+</head>
+
+<body bgcolor = "white">
+
+<center>
+
+<TABLE BORDER="0" width="800" cellspacing="1" cellpadding="0">
+      		
+<tr>
+
+<td class="bg" align="left" width="800" colspan="0"> 
+
+<div class="suckertreemenu">
+<ul id="treemenu1">
+	<li><center><a href="home?<sessionId>">Home</a></center></li>
+	<li><center><a href="signOut?<sessionId>">Sign Out</a></center></li>
+	<li><center><a>Server Options</a></center>
+<ul>
+	<li><a href="serverOptions?<sessionId>">Server Settings</a></li>
+	<li><a href="configurePictures?<sessionId>">Configure Pictures</a></li>
+	<li><a href="configureEmail?<sessionId>">Configure Email</a></li>
+	<li><a href="diagnostic?<sessionId>">Diagnostic</a></li>
+	<li><a href="shutdown?<sessionId>">Shutdown</a></li>
+</ul>
+<li>
+</ul>
+<br style="clear: left;" />
+</div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="headerpic" colspan="0" width="800" height="80">
+
+</td> 
+ 
+</tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+

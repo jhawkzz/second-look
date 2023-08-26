@@ -1,0 +1,10 @@
+
+TARGETNAME=AppIntegrityDriver
+TARGETTYPE=DRIVER
+
+TARGETLIBS=$(DDK_LIB_PATH)\ntoskrnl.lib $(DDK_LIB_PATH)\hal.lib $(DDK_LIB_PATH)\Rtlver.lib $(DDK_LIB_PATH)\Wdmsec.lib $(DDK_LIB_PATH)\ntstrsafe.lib $(DDK_LIB_PATH)\fltMgr.lib
+
+LINKER_FLAGS=$(LINKER_FLAGS) /INTEGRITYCHECK
+
+SOURCES=AppIntegrityDriver.c \
+	     hookSystemService.c

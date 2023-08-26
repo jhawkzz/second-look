@@ -1,0 +1,19 @@
+ 
+
+second look web
+-----------------
+before launch:
+   switch paypal to non sandbox
+   update second look weblinks on index.php
+   test payment completed and payment pending emails
+
+
+paypal dev and hotmal logins:
+   trapzzdev@hotmail.com
+   mydevaccount
+
+seller_1260935194_biz@hotmail.com
+260936044
+
+buyer1_1260935142_per@hotmail.com
+260936071

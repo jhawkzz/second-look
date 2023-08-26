@@ -1,0 +1,181 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,2,0
+ PRODUCTVERSION 1,0,2,0
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "Second Look"
+            VALUE "FileVersion", "1, 0, 2, 0"
+            VALUE "InternalName", "Second Look"
+            VALUE "LegalCopyright", "Copyright © 2010 Compiled Art LLC"
+            VALUE "OriginalFilename", "Second Look.exe"
+            VALUE "ProductName", "Second Look"
+            VALUE "ProductVersion", "1, 0, 2, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+ID_DIALOG_ABOUT DIALOGEX 0, 0, 184, 104
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "About"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Version:",ID_STATIC_VERSION_STR,21,4,26,11
+    LTEXT           "0.01 Jun 08-08:40:22) D",ID_STATIC_VERSION,51,4,124,8
+    LTEXT           "Compiled Art LLC",ID_STATIC_WEBSITE,67,16,58,9
+    LTEXT           "Copyright © 2010 Compiled Art LLC",ID_STATIC_COPYRIGHT,28,93,127,8
+END
+
+ID_DIALOG_DB_PROGRESS DIALOGEX 0, 0, 269, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Second Look"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",ID_PROGRESS_DB_CREATE,"msctls_progress32",PBS_SMOOTH | WS_BORDER,7,32,255,15
+    LTEXT           "Please wait while Second Look generates the image database for the first time.\r\nThis might take a minute depending on your computer's configuration.",ID_STATIC_PROGRESS_INFO,7,9,254,17
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+ID_ICON_X9              ICON                    "x9.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+ID_BITMAP_ABOUT         BITMAP                  "x9_about.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// BINARY
+//
+
+IDR_HEADER_HTML         BINARY                  "html\\header.html"
+IDR_SECUREHEADER_HTML   BINARY                  "html\\secureHeader.html"
+IDR_FOOTER_HTML         BINARY                  "html\\footer.html"
+IDR_HEADER_PNG          BINARY                  "html\\header.png"
+IDR_HOME_HTML           BINARY                  "html\\home.html"
+IDR_ICON_GIF            BINARY                  "html\\icon.gif"
+IDR_A_GIF               BINARY                  "html\\a.gif"
+IDR_B_GIF               BINARY                  "html\\b.gif"
+IDR_C_JPG               BINARY                  "html\\c.jpg"
+IDR_BG_JPG              BINARY                  "html\\bg.jpg"
+IDR_OVAL_BLUE_LEFT_GIF  BINARY                  "html\\oval-blue-left.gif"
+IDR_OVAL_BLUE_RIGHT_GIF BINARY                  "html\\oval-blue-right.gif"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    ID_DIALOG_DB_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 262
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

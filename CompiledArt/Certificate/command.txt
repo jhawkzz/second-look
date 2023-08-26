@@ -1,0 +1,4 @@
+signtool sign /v /ac MSCV-GlobalSign.cer /f compiledArt.pfx /p mukaC8aStuva /t http://timestamp.verisign.com/scripts/timstamp.dll AppIntegrityDriver_win7_x64.sys
+
+
+

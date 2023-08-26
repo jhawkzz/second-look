@@ -1,0 +1,228 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+ID_DIALOG_WELCOMEPAGE DIALOGEX 0, 0, 335, 230
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Next",ID_BUTTON_NEXT,203,207,50,14
+    PUSHBUTTON      "Back",ID_BUTTON_BACK,154,207,50,14,WS_DISABLED
+    PUSHBUTTON      "Cancel",ID_BUTTON_CANCEL,280,207,50,14
+    GROUPBOX        "Compiled Art Installer",IDC_STATIC,0,194,335,36
+END
+
+ID_DIALOG_DIALOGSHELL DIALOGEX 0, 0, 335, 230
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Setup"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+ID_DIALOG_EULAPAGE DIALOGEX 0, 0, 335, 230
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Next",ID_BUTTON_NEXT,203,207,50,14
+    PUSHBUTTON      "Back",ID_BUTTON_BACK,154,207,50,14
+    PUSHBUTTON      "Cancel",ID_BUTTON_CANCEL,280,207,50,14
+    CONTROL         "I have read and agree to the license agreement.",ID_RADIO_EULA_AGREE,
+                    "Button",BS_AUTORADIOBUTTON | BS_NOTIFY | WS_TABSTOP,84,172,167,9
+    CONTROL         "I do not agree to the license agreement.",ID_RADIO_EULA_DISAGREE,
+                    "Button",BS_AUTORADIOBUTTON | BS_NOTIFY | WS_TABSTOP,84,182,167,9
+    CONTROL         "",ID_RICHEDIT_EULA,"RichEdit20A",ES_MULTILINE | ES_READONLY | WS_BORDER | WS_VSCROLL,4,38,326,132
+    GROUPBOX        "Compiled Art Installer",IDC_STATIC,0,194,335,36
+END
+
+ID_DIALOG_SETTINGSPAGE DIALOGEX 0, 0, 335, 230
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Next",ID_BUTTON_NEXT,203,207,50,14
+    PUSHBUTTON      "Back",ID_BUTTON_BACK,154,207,50,14
+    PUSHBUTTON      "Cancel",ID_BUTTON_CANCEL,280,207,50,14
+    PUSHBUTTON      "Browse...",ID_BUTTON_DEST_FOLDER,260,70,55,14
+    CONTROL         "Create Desktop Icons",ID_CHECK_CREATE_DESKTOP_ICONS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,131,89,13
+    CONTROL         "Create Start Menu Entries",ID_CHECK_CREATE_STARTMENU_ENTRIES,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,144,109,13
+    GROUPBOX        "Compiled Art Installer",IDC_STATIC,0,194,335,36
+    GROUPBOX        "Destination Folder",IDC_STATIC,10,56,316,38
+    LTEXT           "C:\\Program Files\\Destination Folder\\",ID_STATIC_DEST_FOLDER,16,72,236,9,SS_ENDELLIPSIS
+    GROUPBOX        "Installation Options",IDC_STATIC,10,122,316,38
+END
+
+ID_DIALOG_INSTALLPAGE DIALOGEX 0, 0, 335, 230
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Next",ID_BUTTON_NEXT,203,207,50,14,WS_DISABLED
+    PUSHBUTTON      "Back",ID_BUTTON_BACK,154,207,50,14,WS_DISABLED
+    PUSHBUTTON      "Cancel",ID_BUTTON_CANCEL,280,207,50,14,WS_DISABLED
+    GROUPBOX        "Compiled Art Installer",IDC_STATIC,0,194,335,36
+    CONTROL         "",ID_PROGRESS_INSTALL,"msctls_progress32",WS_BORDER,64,79,206,21
+    GROUPBOX        "Installation Progress",IDC_STATIC,1,63,333,48
+    GROUPBOX        "Installation Status",IDC_STATIC,1,123,333,48
+    LTEXT           "Installing Components...",ID_STATIC_INSTALL_STATUS,7,142,312,13
+END
+
+ID_DIALOG_FINISHPAGE DIALOGEX 0, 0, 335, 230
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Finish",ID_BUTTON_FINISH,203,207,50,14
+    PUSHBUTTON      "Back",ID_BUTTON_BACK,154,207,50,14,WS_DISABLED
+    PUSHBUTTON      "Cancel",ID_BUTTON_CANCEL,280,207,50,14,WS_DISABLED
+    GROUPBOX        "Compiled Art Installer",-1,0,194,335,36
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    ID_DIALOG_WELCOMEPAGE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 334
+    END
+
+    ID_DIALOG_DIALOGSHELL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 328
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 223
+    END
+
+    ID_DIALOG_EULAPAGE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 334
+    END
+
+    ID_DIALOG_SETTINGSPAGE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 334
+    END
+
+    ID_DIALOG_INSTALLPAGE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 334
+    END
+
+    ID_DIALOG_FINISHPAGE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 334
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP                  "Images\\welcome.bmp"
+IDB_BITMAP2             BITMAP                  "Images\\license_agreement.bmp"
+IDB_BITMAP3             BITMAP                  "Images\\destination_folder.bmp"
+IDB_BITMAP4             BITMAP                  "Images\\updating_system.bmp"
+IDB_BITMAP5             BITMAP                  "Images\\finished.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_EULA
+//
+
+ID_RCDATA_EULA          RT_EULA                 "Eula\\eula.rtf"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_RCDATA
+//
+
+IDR_RT_RCDATA1          RT_RCDATA               "Data\\Second Look.exe"
+IDR_RT_RCDATA2          RT_RCDATA               "Data\\AppIntegrityDriver_x86.inf"
+IDR_RT_RCDATA3          RT_RCDATA               "Data\\Uninstall.exe"
+IDR_RT_RCDATA4          RT_RCDATA               "Data\\AppIntegrityDriver_XP.sys"
+IDR_RT_RCDATA5          RT_RCDATA               "Data\\AppIntegrityDriver_Vista_x86.sys"
+IDR_RT_RCDATA6          RT_RCDATA               "Data\\AppIntegrityDriver_Vista_x64.sys"
+IDR_RT_RCDATA7          RT_RCDATA               "Data\\AppIntegrityDriver_Win7_x64.sys"
+IDR_RT_RCDATA8          RT_RCDATA               "Data\\AppIntegrityDriver_x64.inf"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "defaultIcon.ico"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

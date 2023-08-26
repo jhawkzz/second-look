@@ -1,0 +1,311 @@
+
+Goal of Document
+================
+To explain Application Integrity, and it's connection with X9.
+
+
+Application Integrity
+=====================
+Application Integrity is the name used to describe the
+prevention of undesired termination of a process.
+
+Security software can only succeed if customers
+are able to trust that it fulfills its advertised functions
+and cannot be circumvented by non-authenticated users.
+
+This trust led to the term Application Integrity, to convey 
+to users that the integrity of the application cannot be compromised.
+
+
+Windows Shutdown Methods
+========================
+Windows operating systems provide two general ways to terminate a process.
+The first way is by means of a graceful shutdown request, typically handled
+by a WM_CLOSE message. Windows sends WM_CLOSE to the process, which then
+saves all data, cleans up resources, and exits. If a process is unresponsive, 
+due to either a bug in its execution or by simply ignoring the WM_CLOSE message,
+Windows can forcefully terminate a process.
+
+A process is forcefully terminated by using the Windows API function TerminateProcess.
+This causes the immediate termination of all threads running within the process.
+A process is given no time to save data or clean up resources, and instead is simply stopped.
+This can be unsafe in general practice because data can be lost, but proves effective in stopping
+any unwanted process.
+
+
+Problems Due To TerminateProcess
+================================
+Because Windows allows a user to effectively call
+TerminateProcess on any application via TaskManager's End Process,
+a process has no way to guarantee it will not be shut down by a user.
+This poses a problem for any sort of security software, because malicious
+software or users can simply terminate the security software.
+
+According to Microsoft's documentation for TerminateProcess:
+"A process cannot prevent itself from being terminated."
+(http://msdn2.microsoft.com/en-us/library/ms686714.aspx)
+
+
+Reasons For Preventing Process Termination
+==========================================
+The goal of X9 is to provide activity monitoring on a scheduled basis.
+It should only allow itself to be shutdown if an authenticated user
+requests that it do so. X9 provides a web interface that allows
+a user with a login ID and password to access features such as:
+Captured Screenshots, Email Forwarding, UnInstallation and Shutdown.
+
+Because X9 is an activity monitoring application, it is likely that
+non-authenticated users will want to disable X9. They can easily 
+circumvent the authentication process by opening Task Manager and 
+choosing End Process on X9. X9 has no way of preventing this
+and ensuring that the user requesting termination is authenticated.
+
+Potential customers will require that X9 provide certain features
+such as process termination only to authenticated users. Otherwise 
+there is no way for a customer to trust that X9 is monitoring activity 
+as desired.
+
+
+Termination Prevention Methods
+==============================
+X9 provides two layers of protection against
+unwanted process termination. 
+
+1) Ignoring WM_CLOSE: Although X9 creates a hidden window
+   that is used to manage its System Tray Icon, all WM_CLOSE
+   messages are processed, but no action is taken. Thus, when
+   a user attempts to gracefully shutdown X9, they are unable to.
+   
+2) Application Integrity: Contrary to Microsoft documentation, it
+   is possible for an application to prevent TerminateProcess from
+   succeeding. The remainder of this document will cover the implementation
+   of Application Integrity.
+   
+   
+
+Explanation of Windows NT Architecture
+======================================
+Before explaining the process by which Application Integrity works,
+it is necessary to provide a brief, high level explanation of the 
+Windows NT Architecture.
+
+Windows NT was designed to be modular. The idea behind the design is that all
+core functionality resides at the Kernel level, and any User actions
+are routed to the appropriate Kernel function. With this in mind, it would
+be possible to take the Windows NT core and lay any GUI on top of it. The GUI
+would only need to call the approprate Kernel functions.
+
+Windows NT based operating systems (Windows NT, Windows 2000, Windows XP and Windows Vista)
+work in this manner. They take the GUI functionality familiar to Windows 9x users 
+(Windows 95, Windows 98, Windows ME) and lay that on top of the more modular and stable 
+Windows NT foundation.
+
+When a user function is called in Windows, it is actually routed to the kernel.
+For example:
+A program calls TerminateProcess( hProcess, 0 );
+The implementation of this function at the user level is quite simple.
+A few error checks are made, and then the Kernel's NtTerminateProcess function is called.
+
+NOTE: All Kernel functions are labeled with either the Nt or Zw prefix. Nt stands for NT, and
+      Zw truly stands for nothing, and was picked for that reason.)
+      
+NOTE: Kernel functions are also called System Services.
+
+It is the method that a user application calls the NtTerminateProcess
+that is of interest.
+
+In the Kernel, there is a table called the Service Descriptor Table.
+Among other things, this table has an array of function addresses. Each
+element of the array corresponds to a different Nt or Zw System Service in the Kernel.
+So, array[ 0 ] might contain the address of NtOpenProcess, and array[ 1 ] might contain
+the address of NtTerminateProcess.
+
+NOTE: The index used in the array is known as the 'Service Call Number'.
+
+Back in User Mode, NTDLL.dll contains all of the functions for the user application to call. 
+This includes TerminateProcess. When TerminateProcess is called, basic error 
+checking is done (such as 'Is the process handle 0?') and it then calls the 
+Kernel's NtTerminateProcess by doing the following:
+
+Place the System Service's call number in the EDX register.
+Place the user's stack pointer in the EAX register.
+Call either Interrupt 2E or SYSENTER (depending on the CPU)
+   --Transition to Kernel Mode--
+Kernel takes the call number in the EDX register and 
+uses that as the index in its Service Descriptor Table to call
+the correct function.
+
+Ex: ServiceDescriptorTable.Array[ EDX VALUE ].
+
+The value at this array index can be changed to point to a function
+implemented by a Kernel Mode driver. This would allow an application
+using a driver to re-route a System Service to its own function first.
+
+This technique is known as Kernel Hooking.
+
+
+Application Integrity Implementation
+====================================
+Application Integrity consists of two parts:
+
+1) Application Integrity Driver: Because the table that must
+   be modified exists in Kernel Mode, the only way to access it
+   is thru another application running in Kernel Mode.
+   
+   The only type of application that can run in Kernel Mode is a driver.
+   
+
+2) Application Integrity User Mode: This exists to communicate with the driver,
+   so that X9 is able to establish a connection and make the driver aware of
+   what it should do to protect X9.
+   
+ 
+Application Integrity Driver
+============================
+The driver is installed either by the X9 Installer,
+or in debug using the X9 Application. It is installed
+as a Kernel Mode Driver, and flagged as a driver
+that should start when Windows first boots.
+
+The basic concept of the driver is that it accepts a 
+Process ID to monitor, and compares that to the Process ID
+of any process that is to be terminated. If they match,
+it returns STATUS_ACCESS_DENIED instead of forwarding to the real
+NtTerminateProcess. This is handled by the driver's own
+implementation of NtTerminateProcess.
+
+When the driver starts, DriverEntry installs the kernel hook
+by calling AppIntegrity_InstallSystemHook. This places the
+address of the driver's NtTerminateProcess in the 
+Service Descriptor Table, and the driver keeps a backup
+of the original address.
+
+When TerminateProcess is called by any user application it 
+eventually routes to the driver's NtTerminateProcess, where
+it can test the process ID. If it is not the process ID to protect,
+it calls the original NtTerminateProcess using the address saved
+when the hook was first installed.
+
+By calling the original, a chain of hooks is built. It is possible
+that other applications (Such as Check Point's Zone Alarm) have also
+implemented a hook. Therefore, it is important that the address saved
+when the hook was installed is used.
+
+An example chain might look as follows:
+UserApplicationTerminateProcess->X9TerminateProcess->ZoneAlarmTerminateProcess->KernelTerminateProcess
+
+When the driver is unloaded, the system hook is removed and the original address is placed back in the table.
+
+NOTE: It is *imperitive* that the driver not be started or stopped during Windows runtime. 
+      Starting the driver is dangerous because it introduces a potential 'race condition' in which
+      Windows could be in the process of calling NtTerminateProces WHILE the new hook is being installed.
+      This would result in Windows halting execution and displaying a BSOD.
+      
+      Stopping the driver is dangerous for two reasons. The first is the reason stated above for starting,
+      where a 'race condition' could occur while removing the hook.
+      The second reason is that it is highly possible another application has installed a hook after 
+      the driver. In this case, the chain would look as follows:
+      
+      UserApplicationTerminateProcess->OtherApplication->X9TerminateProcess->ZoneAlarmTerminateProcess->KernelTerminateProcess
+      
+      If the driver were to remove its hook, there would be a break in the chain, and a BSOD would result at the next
+      call to NtTerminateProcess.
+      
+
+
+Application Integrity UserMode
+==============================
+The UserMode implementaton of Application Integrity is
+responsible for communcating with the driver, and enabling
+or disabling monitoring. 
+
+The driver provides two IO Controls for communication.
+They are:
+IOCTL_APPINTEGRITY_ACTIVATE_MONITORING - This toggles monitoring of a process ID on or off.
+   Because the driver is always running, and a process ID cannot be negative, this message allows
+   X9 to turn on or off active monitoring of its process ID.
+
+IOCTL_APPINTEGRITY_SET_PROCESS_ID - This sets the process ID that the driver will compare
+   when handling NtTerminateProcess. Because Process IDs are unique, each instance of X9
+   will have a new process ID that must be monitored.
+   
+   
+
+Practical Implementation
+========================
+Now that all the concepts have been explained, the acutal
+implementation can be described.
+
+The X9 Installer should copy X9.exe and appIntegrityDriver.sys to
+the installation folder. It should then install the driver as a
+kernel driver that will boot with Windows.
+
+The Installer should prompt the user to reboot after installation, because
+it is not safe to start the driver while Windows is running.
+
+If the user chooses not to reboot, then X9 will not be protected
+until they do.
+
+When the system is rebooted, the driver will start with Windows
+and install its hook. Doing this at boot time provides two advantages:
+
+1) It is completely safe, without the risks mentioned in the driver description.
+2) The highest level user, SYSTEM, starts the driver. Because SYSTEM starts it,
+   Windows Vista's UAC is not invoked, allowing the hook to be installed even on systems
+   with UAC enabled.
+   
+When X9 is launched, it makes a call to m_AppIntegrity.EnableIntegrity.
+
+The following steps are taken:
+Opens a working handle to the driver for communication.
+Gets the unique Process ID for this instance of X9.
+Sends the Process ID to the driver via IOCTL_APPINTEGRITY_SET_PROCESS_ID.
+Activates monitoring via IOCTL_APPINTEGRITY_ACTIVATE_MONITORING.
+
+X9 is now under the protection of Application Integrity, and cannot be terminated
+via TerminateProcess.
+
+
+When an authenticated user shuts down X9, it makes a call to m_AppIntegrity.DisableIntegrity.
+
+The following steps are taken:
+DeActivates monitoring via IOCTL_APPINTEGRITY_ACTIVATE_MONITORING.
+Closes the working handle to the driver.
+
+The driver now goes idle and simply forwards all NtTerminateProcess requests to the
+next NtTerminateProcess in the chain. Active monitoring would be enabled again if X9 
+were launched.
+
+
+
+Compiling, Debugging and Working with the Driver
+================================================
+If you do not wish to use the driver, no action need be taken.
+Calls to Enable/Disable Integrity will simply fail
+with no driver installed.
+
+Compiling the driver requires the Windows Vista DDK. Once this
+is downloaded and installed, the driver can be compiled
+using a Windows XP Free Build Environment. (Checked is the
+equivalent of debug, and Free is the equivalent of Release).
+
+NOTE: The path to the driver code cannot contain any spaces!
+"C:\My Code\Driver\" is invalid.
+"C:\MyCode\Driver\" is acceptable.
+
+In the AppIntegrityDriver folder, the driver can be compiled via the
+Build command, or with the batch file 'Go.bat'. Go.bat
+will build and then copy the compiled driver to the Debug and
+Release folders of X9.
+
+To install the driver, the function "InstallDriver" should be uncommented
+in X9, and a debug build should be compiled and run. This will install the driver
+at the path X9 was run at.
+
+There is an equivalent "UnInstallDriver" that can be used to remove the driver.
+It is also possible to remove the driver by remove the registry key located at:
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppIntegrityDriver
+and then rebooting.
+
+The code for the driver is in a folder labeled AppIntegrityDriver in the
+X9 solution. This can be used to work on the driver.

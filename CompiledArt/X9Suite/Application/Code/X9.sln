@@ -1,0 +1,40 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "X9", "X9.vcproj", "{28BA9BF5-AA3F-47D0-954A-093DD54C8786}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppIntegrityDriver", "AppIntegrityDriver", "{1FF93E85-98B7-4A1D-86AF-4DCB11ACED29}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\AppIntegrityDriver\AppIntegrityDriver.c = ..\..\AppIntegrityDriver\AppIntegrityDriver.c
+		..\..\AppIntegrityDriver\appIntegrityDriverDefines.h = ..\..\AppIntegrityDriver\appIntegrityDriverDefines.h
+		..\..\AppIntegrityDriver\Application Integrity.txt = ..\..\AppIntegrityDriver\Application Integrity.txt
+		..\..\AppIntegrityDriver\makefile = ..\..\AppIntegrityDriver\makefile
+		..\..\AppIntegrityDriver\sources = ..\..\AppIntegrityDriver\sources
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hook System Service", "Hook System Service", "{DD6EE4FB-FD93-44E0-874A-D6E2C4B3FA82}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\AppIntegrityDriver\hookSystemService.c = ..\..\AppIntegrityDriver\hookSystemService.c
+		..\..\AppIntegrityDriver\hookSystemService.h = ..\..\AppIntegrityDriver\hookSystemService.h
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		X64 Debug|Win32 = X64 Debug|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28BA9BF5-AA3F-47D0-954A-093DD54C8786}.Debug|Win32.ActiveCfg = Debug|Win32
+		{28BA9BF5-AA3F-47D0-954A-093DD54C8786}.Debug|Win32.Build.0 = Debug|Win32
+		{28BA9BF5-AA3F-47D0-954A-093DD54C8786}.Release|Win32.ActiveCfg = Release|Win32
+		{28BA9BF5-AA3F-47D0-954A-093DD54C8786}.Release|Win32.Build.0 = Release|Win32
+		{28BA9BF5-AA3F-47D0-954A-093DD54C8786}.X64 Debug|Win32.ActiveCfg = X64 Debug|Win32
+		{28BA9BF5-AA3F-47D0-954A-093DD54C8786}.X64 Debug|Win32.Build.0 = X64 Debug|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD6EE4FB-FD93-44E0-874A-D6E2C4B3FA82} = {1FF93E85-98B7-4A1D-86AF-4DCB11ACED29}
+	EndGlobalSection
+EndGlobal

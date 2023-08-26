@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Installer", "Installer\Installer.vcproj", "{33FE450C-E8D0-4D84-833D-AF3D2D8EB65C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E609F156-EE31-467B-AF13-B67EDFAEC8FA} = {E609F156-EE31-467B-AF13-B67EDFAEC8FA}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Uninstaller", "Uninstaller\Uninstaller.vcproj", "{E609F156-EE31-467B-AF13-B67EDFAEC8FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33FE450C-E8D0-4D84-833D-AF3D2D8EB65C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{33FE450C-E8D0-4D84-833D-AF3D2D8EB65C}.Debug|Win32.Build.0 = Debug|Win32
+		{33FE450C-E8D0-4D84-833D-AF3D2D8EB65C}.Release|Win32.ActiveCfg = Release|Win32
+		{33FE450C-E8D0-4D84-833D-AF3D2D8EB65C}.Release|Win32.Build.0 = Release|Win32
+		{E609F156-EE31-467B-AF13-B67EDFAEC8FA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E609F156-EE31-467B-AF13-B67EDFAEC8FA}.Debug|Win32.Build.0 = Debug|Win32
+		{E609F156-EE31-467B-AF13-B67EDFAEC8FA}.Release|Win32.ActiveCfg = Release|Win32
+		{E609F156-EE31-467B-AF13-B67EDFAEC8FA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
